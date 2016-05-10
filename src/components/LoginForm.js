@@ -41,7 +41,7 @@ var LoginForm = React.createClass({
    * * onChange: function to call when user enters text
    */
   propTypes: {
-  	formType: PropTypes.string,
+    formType: PropTypes.string,
     form: PropTypes.object,
     value: PropTypes.object,
     onChange: PropTypes.func
@@ -55,8 +55,8 @@ var LoginForm = React.createClass({
    */
   render() {
 
-		let formType = this.props.formType;
-		
+    let formType = this.props.formType;
+    
     let options = {
       auto: 'placeholders',
       fields: {
@@ -130,12 +130,12 @@ var LoginForm = React.createClass({
       });
       options.fields['username'] = username;
       options.fields['password'] = password;
-        break;
-        
-        /**
-         * ### Reset password
-         * The password reset form has only 1 field
-         */
+      break;
+      
+      /**
+       * ### Reset password
+       * The password reset form has only 1 field
+       */
     case(FORGOT_PASSWORD):
       loginForm = t.struct({
         email: t.String
@@ -149,12 +149,12 @@ var LoginForm = React.createClass({
      * returns the Form component with the correct structures
      */
     return (
-      <Form ref="form"
-            type={loginForm}
-            options={options}
-            value={this.props.value}
-            onChange={this.props.onChange}
-      />
+        <Form ref="form"
+      type={loginForm}
+      options={options}
+      value={this.props.value}
+      onChange={this.props.onChange}
+        />
 
     );
   }

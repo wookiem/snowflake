@@ -14,7 +14,6 @@ import auth from './auth/authReducer';
 import device from './device/deviceReducer';
 import global from './global/globalReducer';
 import profile from './profile/profileReducer';
-import router from './router/routerReducer';
 
 import { combineReducers } from 'redux';
 
@@ -25,7 +24,6 @@ import { combineReducers } from 'redux';
  * EVERY TIME there is a basic action
  */ 
 const rootReducer = combineReducers({
-	router,
   auth,
   device,
   global,

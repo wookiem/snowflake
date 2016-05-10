@@ -2,7 +2,7 @@
  * # app.js
  *  Display startup screen and 
  *  getSessionTokenAtStartup which will navigate upon completion 
-*
+ *
  *   
  *  
  */
@@ -21,17 +21,6 @@ import { connect } from 'react-redux';
 import {Map} from 'immutable';
 
 /**
-	* Router
-	*/
-import {Actions} from 'react-native-router-flux'
-
-/**
- * Project imports
- */
-import Login from './Login';
-//const StartupScreen = require('../components/startupScreen').default;
-
-/**
  * Project actions
  */
 import * as authActions from '../reducers/auth/authActions';
@@ -39,13 +28,13 @@ import * as deviceActions from '../reducers/device/deviceActions';
 import * as globalActions from '../reducers/global/globalActions';
 
 /**
- * We only need React
+ * The components we need from ReactNative
  */
 import React,
 { 	
-	StyleSheet,
-	View,
-	Text
+  StyleSheet,
+  View,
+  Text
 }
 from 'react-native';
 
@@ -68,10 +57,9 @@ function mapStateToProps(state) {
   };
 };
 
-/*
+/**
  * Bind all the functions from the ```actions``` and bind them with
  * ```dispatch```
-
  */
 function mapDispatchToProps(dispatch) {
 
@@ -86,11 +74,26 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+
+var styles = StyleSheet.create({
+  container: {
+    borderTopWidth: 2,
+    borderBottomWidth:2,
+    marginTop: 80,
+    padding: 10
+  },
+  summary: {
+    fontFamily: 'BodoniSvtyTwoITCTT-Book',
+    fontSize: 18,
+    fontWeight: 'bold'
+  }
+});
+
 /**
  * ## App class
  */
 let App = React.createClass({
- 	/**
+  /**
    * See if there's a sessionToken from a previous login
    * 
    */
@@ -99,26 +102,12 @@ let App = React.createClass({
   },
   
   render() {
-  	return(
-    	<View style={ styles.container }>
-				<Text style={ styles.summary }>App Startup Screen</Text>
-			</View>
+    return(
+      <View style={ styles.container }>
+	<Text style={ styles.summary }>App Startup Screen</Text>
+      </View>
     );
   }
-});
-
-var styles = StyleSheet.create({
-	container: {
-		borderTopWidth: 2,
-		borderBottomWidth:2,
-		marginTop: 80,
-		padding: 10
-	},
-	summary: {
-		fontFamily: 'BodoniSvtyTwoITCTT-Book',
-		fontSize: 18,
-		fontWeight: 'bold'
-	}
 });
 
 /**

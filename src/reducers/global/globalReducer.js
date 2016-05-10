@@ -54,12 +54,12 @@ export default function globalReducer(state = initialState, action) {
   case SIGNUP_SUCCESS:
   case LOGIN_SUCCESS:
   case GET_PROFILE_SUCCESS:
-  	return state.set('currentUser',action.payload);
-  	
+    return state.set('currentUser',action.payload);
+    
   case SESSION_TOKEN_SUCCESS:
-		return state.set('currentUser',action.payload.sessionToken);
+    return state.set('currentUser',action.payload.sessionToken);
 
-  /**
+    /**
      * ### Clear currentUser
      *
      * 
@@ -68,7 +68,7 @@ export default function globalReducer(state = initialState, action) {
      */
   case LOGOUT_SUCCESS:
     
-		return state.set('currentUser', null);
+    return state.set('currentUser', null);
     
     /**
      * ### sets the payload into the store
@@ -96,9 +96,15 @@ export default function globalReducer(state = initialState, action) {
       let newState = {};
       newState['auth'] = _state.auth.toJS();
       newState['device'] = _state.device.toJS();
-      newState['profile'] = _state.profile.toJS();    
-      newState['global'] = _state.global.set('store',null).toJS();
+      newState['profile'] = _state.profile.toJS();
 
+
+      //Make sure global doesn't have the previous currentState
+        //let _noCurrentState =  _state.global.set('currentState',null);
+        //let _noStore = _noCurrentState.set('store',null);
+      
+      newState['global'] =  _state.global.set('currentState',null).set('store',null).toJS();
+      
       return state.set('showState',action.payload)
         .set('currentState',newState);
     } else {
@@ -112,6 +118,7 @@ export default function globalReducer(state = initialState, action) {
      *
      */    
   case SET_STATE:
+    debugger;
     var global = JSON.parse(action.payload).global;
     var next = state.set('currentUser', global.currentUser)
           .set('showState', false)

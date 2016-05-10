@@ -13,10 +13,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-/**
- * Flux router
- */
-import {Actions} from 'react-native-router-flux'
 
 /**
  * The actions we need
@@ -69,8 +65,8 @@ const actions = [
 function mapStateToProps(state) {
   return {
       ...state
-  };
-}
+  }
+};
 
 function mapDispatchToProps(dispatch) {
   const creators = Map()

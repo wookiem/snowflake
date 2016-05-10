@@ -1,5 +1,6 @@
 /**
  * # Subview.js
+ *
  *  This is called from main to demonstrate the back button
  *  
  */
@@ -18,9 +19,9 @@ import { connect } from 'react-redux';
 import {Map} from 'immutable';
 
 /**
-	* Router
-	*/
-import {Actions} from 'react-native-router-flux'
+ * Router
+ */
+import {Actions} from 'react-native-router-flux';
 
 /**
  * Navigation Bar
@@ -28,13 +29,13 @@ import {Actions} from 'react-native-router-flux'
 import NavigationBar from 'react-native-navbar';
 
 /**
- * We only need React
+ * The necessary components from React
  */
 import React,
 { 	
-	StyleSheet,
-	View,
-	Text
+  StyleSheet,
+  View,
+  Text
 }
 from 'react-native';
 
@@ -74,47 +75,47 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+var styles = StyleSheet.create({
+  container: {
+    borderTopWidth: 2,
+    borderBottomWidth:2,
+    marginTop: 80,
+    padding: 10
+  },
+  summary: {
+    fontFamily: 'BodoniSvtyTwoITCTT-Book',
+    fontSize: 18,
+    fontWeight: 'bold'
+  }
+});
+
 /**
- * ## App class
+ * ## Subview class
  */
 let Subview = React.createClass({
   
   render() {
     var titleConfig = {
-   		title: "Subview"
-   	};
-   	
-   	var leftButtonConfig = {
-   		title: 'Back',
-   		handler: Actions.pop
-   	};
-   	
-  	return(
-  		<View>
-				<NavigationBar
-					title={ titleConfig }
-					leftButton={ leftButtonConfig }
-				/>
-				<View style={ styles.container }>
-					<Text style={ styles.summary }>Subview</Text>
-				</View>
-			</View>
+      title: "Subview"
+    };
+    
+    var leftButtonConfig = {
+      title: 'Back',
+      handler: Actions.pop
+    };
+    
+    return(
+      <View>
+	<NavigationBar
+            title={ titleConfig }
+            leftButton={ leftButtonConfig }
+	/>
+	<View style={ styles.container }>
+	  <Text style={ styles.summary }>Subview</Text>
+	</View>
+      </View>
     );
   }
-});
-
-var styles = StyleSheet.create({
-	container: {
-		borderTopWidth: 2,
-		borderBottomWidth:2,
-		marginTop: 80,
-		padding: 10
-	},
-	summary: {
-		fontFamily: 'BodoniSvtyTwoITCTT-Book',
-		fontSize: 18,
-		fontWeight: 'bold'
-	}
 });
 
 /**

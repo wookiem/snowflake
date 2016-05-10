@@ -1,8 +1,7 @@
 /**
  * Register.js
  * 
- * 
- * 
+ * Allow user to register 
  */
 'use strict';
 /**
@@ -29,13 +28,9 @@ import {Map} from 'immutable';
 import LoginRender from '../components/LoginRender';
 
 /**
- * The necessary React components
+ * The necessary React 
  */
-import React,
-{
-  Component
-}
-from 'react-native';
+import React from 'react-native';
 
 const {
   LOGIN, 
@@ -69,38 +64,37 @@ function mapDispatchToProps(dispatch) {
 }
 
 function buttonPressHandler(signup, username, email, password) {
-	signup (username, email, password);
+  signup (username, email, password);
 }
 
 let Register = React.createClass({
 
   render() {
 
-  	let loginButtonText = 'Register';
-		let onButtonPress = buttonPressHandler.bind(null,
-					this.props.actions.signup,
-					this.props.auth.form.fields.username,
-					this.props.auth.form.fields.email,
-					this.props.auth.form.fields.password
-		);
- 		
+    let loginButtonText = 'Register';
+    let onButtonPress = buttonPressHandler.bind(null,
+					        this.props.actions.signup,
+					        this.props.auth.form.fields.username,
+					        this.props.auth.form.fields.email,
+					        this.props.auth.form.fields.password
+		                               );
+    
 
 
 
-		return(
-			<LoginRender 
-				formType={ REGISTER }
-				loginButtonText={ loginButtonText }
-				onButtonPress={ onButtonPress }				
-				displayPasswordCheckbox ={ true }
-				leftMessageType={ FORGOT_PASSWORD }
-				rightMessageType={ LOGIN }
-				auth={ this.props.auth }
-				global={ this.props.global }
+    return(
+      <LoginRender 
+          formType={ REGISTER }
+          loginButtonText={ loginButtonText }
+          onButtonPress={ onButtonPress }				
+          displayPasswordCheckbox ={ true }
+          leftMessageType={ FORGOT_PASSWORD }
+          rightMessageType={ LOGIN }
+          auth={ this.props.auth }
+          global={ this.props.global }
+      />
 
-			/>
-
-		);
+    );
   }
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

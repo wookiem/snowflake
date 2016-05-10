@@ -1,3 +1,12 @@
+# NOTES: 
+
+###Due to health issues and other demanding life events, I am no longer actively maintaining Snowflake.  
+
+###Trying to keep Snowflake working with all the associated Javascript library changes is a never ending job and requires more time then I have time for.  
+
+###If you successfully upgrade Snowflake, please make a PR and I will merge. 
+
+
 Snowflake ![snowflake](https://cloud.githubusercontent.com/assets/1282364/11599365/1a1c39d2-9a8c-11e5-8819-bc1e48b30525.png)
 ==================================
 #### A React-Native starter mobile app, or maybe just an example, or maybe a boilerplate (you decide) for iOS and Android with a single code base. 
@@ -5,11 +14,12 @@ Snowflake ![snowflake](https://cloud.githubusercontent.com/assets/1282364/115993
 [![Join the chat at https://gitter.im/bartonhammond/snowflake](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bartonhammond/snowflake?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ![ios](https://img.shields.io/badge/IOS--blue.svg) [![Build Status](https://www.bitrise.io/app/348ae0a97c5e147a.svg?token=RmDwzjeIGuo7i9MeazE1fg)](https://www.bitrise.io/app/348ae0a97c5e147a)
 ![andriod](https://img.shields.io/badge/Android--blue.svg) [![Build Status](https://www.bitrise.io/app/1e0425744dcc7ce3.svg?token=uvZDZvo89BLXvjrArJJreQ)](https://www.bitrise.io/app/1e0425744dcc7ce3)
-[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/bartonhammond/snowflake/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/bartonhammond/snowflake/blob/master/LICENSE) 
 
 --------------- 
+Navigation is handled with [React Native Router Flux](https://github.com/aksonov/react-native-router-flux)
 
-Using Redux and Immutable, the state of the application is fully testable with Jest, currently at 86% coverage. 
+Using [Redux](https://github.com/reactjs/react-redux) and [Immutable](https://facebook.github.io/immutable-js/), the state of the application is testable with Jest, currently at 80% coverage. 
 
 Snowflake supports Hot Reloading of its state.  Snowflake uses CI with [Bitrise.io]( https://www.bitrise.io) and has extensive docs and 45+ min of video demonstating implementation.
 
@@ -151,10 +161,6 @@ Using Validate.js for the Form processing was a breeze!  And with the ability to
 
 ## Setup
 
-* NOTE: as of release 0.0.10, ```npm3``` is required
-
-```npm install -g npm3```
-
 * [Install React-Native](https://facebook.github.io/react-native/docs/getting-started.html#content)
 
 * Clone snowflake:
@@ -163,9 +169,9 @@ Using Validate.js for the Form processing was a breeze!  And with the ability to
  git clone https://github.com/bartonhammond/snowflake.git
  ```
 
-*  cd snowflake
+* install dependencies
 ```
-npm3 install
+npm install
 ```
 
 *  Copy or move ```src/lib/config.example.js``` to ```src/lib/config.js```.

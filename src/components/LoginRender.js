@@ -1,8 +1,8 @@
 /**
  * # Login.js
  * 
- * This class is a little complicated as it handles 4 states. It's also
- * a container so there is boilerplate from Redux similiar to ```App```.
+ * This class is a little complicated as it handles multiple states.
+ *
  */
 'use strict';
 /**
@@ -69,11 +69,11 @@ import Dimensions from 'Dimensions';
 var {height, width} = Dimensions.get('window'); // Screen dimensions in current orientation
 
 /**
- * The 4 states were interested in
+ * The states were interested in
  */
 const {
-	LOGIN,
-	REGISTER,
+  LOGIN,
+  REGISTER,
   FORGOT_PASSWORD
 } = require('../lib/constants').default;
 
@@ -143,14 +143,14 @@ class LoginRender extends Component {
    * As the properties are validated they will be set here.
    */
   componentWillReceiveProps(nextprops) {
-		this.setState({
-			value: {
-				username: nextprops.auth.form.fields.username,
-				email: nextprops.auth.form.fields.email,
-				password: nextprops.auth.form.fields.password,
-				passwordAgain: nextprops.auth.form.fields.passwordAgain
-			}
-		});
+    this.setState({
+      value: {
+	username: nextprops.auth.form.fields.username,
+	email: nextprops.auth.form.fields.email,
+	password: nextprops.auth.form.fields.password,
+	passwordAgain: nextprops.auth.form.fields.passwordAgain
+      }
+    });
   }
   
   /**
@@ -179,44 +179,47 @@ class LoginRender extends Component {
       {value}
     );
   }
-  
-//   getMessage(actions, messageType) {
-   getMessage(messageType, actions) {
-  	let forgotPassword =
+  /**
+  *  Get the appropriate message for the current action
+  *  @param messageType FORGOT_PASSWORD, or LOGIN, or REGISTER
+  *  @param actions the action for the message type
+  */
+  getMessage(messageType, actions) {
+    let forgotPassword =
     <TouchableHighlight
         onPress={() => {
-        	actions.forgotPasswordState();
-        	Actions.ForgotPassword();
-    		}} >
+            actions.forgotPasswordState();
+            Actions.ForgotPassword();
+          }} >
       <Text>Forgot Password?</Text>
     </TouchableHighlight>;
 
     let alreadyHaveAccount =
     <TouchableHighlight
         onPress={() => {
-        	actions.loginState();
-        	Actions.Login();
-        }} >
+            actions.loginState();
+            Actions.Login();
+          }} >
       <Text>Already have an account?</Text>
     </TouchableHighlight>;
     
     let register =
     <TouchableHighlight 
-    	onPress={() => {
-    		actions.registerState();
-    		Actions.Register();
-    	}} >
+        onPress={() => {
+            actions.registerState();
+            Actions.Register();
+          }} >
       <Text>Register</Text>
     </TouchableHighlight>;
     
-		switch(messageType) {
-			case FORGOT_PASSWORD:
-				return forgotPassword;
-			case LOGIN:
-				return alreadyHaveAccount;
-			case REGISTER:	
-				return register;
-		}
+    switch(messageType) {
+    case FORGOT_PASSWORD:
+      return forgotPassword;
+    case LOGIN:
+      return alreadyHaveAccount;
+    case REGISTER:	
+      return register;
+    }
   }
   
   /**
@@ -224,84 +227,84 @@ class LoginRender extends Component {
    * Setup some default presentations and render 
    */
   render() {
-  	var formType = this.props.formType;
-  	var loginButtonText = this.props.loginButtonText;
-  	var onButtonPress = this.props.onButtonPress;
-  	var displayPasswordCheckbox = this.props.displayPasswordCheckbox;
-  	var leftMessageType = this.props.leftMessageType;
-  	var rightMessageType = this.props.rightMessageType;
-  	
-  	var passwordCheckbox = <Text/>;
-  	let leftMessage = this.getMessage(leftMessageType, this.props.actions);
-  	let rightMessage = this.getMessage(rightMessageType, this.props.actions);
-  	
-		let self = this;
+    var formType = this.props.formType;
+    var loginButtonText = this.props.loginButtonText;
+    var onButtonPress = this.props.onButtonPress;
+    var displayPasswordCheckbox = this.props.displayPasswordCheckbox;
+    var leftMessageType = this.props.leftMessageType;
+    var rightMessageType = this.props.rightMessageType;
+    
+    var passwordCheckbox = <Text/>;
+    let leftMessage = this.getMessage(leftMessageType, this.props.actions);
+    let rightMessage = this.getMessage(rightMessageType, this.props.actions);
+    
+    let self = this;
 
-		// display the login / register / change password screens
-		this.errorAlert.checkError(this.props.auth.form.error);
-	 
-		/**
-		* Toggle the display of the Password and PasswordAgain fields
-		*/
-		if (displayPasswordCheckbox) {
-			passwordCheckbox =
-				<ItemCheckbox
-						text="Show Password"
-						disabled={this.props.auth.form.isFetching}
-						onCheck={() => {
-								this.props.actions.onAuthFormFieldChange('showPassword',true)}
-						}
-						onUncheck={() => {
-					this.props.actions.onAuthFormFieldChange('showPassword',false)}
-						}
-				/>;
-		}
+    // display the login / register / change password screens
+    this.errorAlert.checkError(this.props.auth.form.error);
+    
+    /**
+     * Toggle the display of the Password and PasswordAgain fields
+     */
+    if (displayPasswordCheckbox) {
+      passwordCheckbox =
+      <ItemCheckbox
+          text="Show Password"
+          disabled={this.props.auth.form.isFetching}
+          onCheck={() => {
+	      this.props.actions.onAuthFormFieldChange('showPassword',true);
+            }}
+          onUncheck={() => {
+	      this.props.actions.onAuthFormFieldChange('showPassword',false);
+            }}
+      />;
+    }
 
-		/**
-		 * The LoginForm is now defined with the required fields.  Just
-		 * surround it with the Header and the navigation messages
-		 * Note how the button too is disabled if we're fetching. The 
-		 * header props are mostly for support of Hot reloading. 
-		 * See the docs for Header for more info.
-		 */
-	 
-		return(
-			<View style={styles.container}>
-				<ScrollView horizontal={false} width={width} height={height}>
-					<View>
-						<Header isFetching={this.props.auth.form.isFetching}
-										showState={this.props.global.showState}
-										currentState={this.props.global.currentState}
-										onGetState={this.props.actions.getState}
-										onSetState={this.props.actions.setState}                      
-						/>
-						
-						<View style={styles.inputs}>
-							<LoginForm
-									formType={formType}
-									form={this.props.auth.form}
-									value={this.state.value}
-									onChange={self.onChange.bind(self)}
-							/>
-							{passwordCheckbox}
-						</View>
-						
-						<FormButton
-								isDisabled={!this.props.auth.form.isValid || this.props.auth.form.isFetching}
-								onPress={onButtonPress}
-								buttonText={loginButtonText}/>
-								
-						<View >
-							<View style={styles.forgotContainer}>
-								{leftMessage}
-								{rightMessage}
-							</View>
-						</View>	 
-	
-					</View>
-				</ScrollView>
-			</View>
-		);
+    /**
+     * The LoginForm is now defined with the required fields.  Just
+     * surround it with the Header and the navigation messages
+     * Note how the button too is disabled if we're fetching. The 
+     * header props are mostly for support of Hot reloading. 
+     * See the docs for Header for more info.
+     */
+    
+    return(
+      <View style={styles.container}>
+	<ScrollView horizontal={false} width={width} height={height}>
+	  <View>
+	    <Header isFetching={this.props.auth.form.isFetching}
+                    showState={this.props.global.showState}
+                    currentState={this.props.global.currentState}
+                    onGetState={this.props.actions.getState}
+                    onSetState={this.props.actions.setState}                      
+	    />
+	    
+	    <View style={styles.inputs}>
+	      <LoginForm
+                  formType={formType}
+                  form={this.props.auth.form}
+                  value={this.state.value}
+                  onChange={self.onChange.bind(self)}
+	      />
+	      {passwordCheckbox}
+            </View>
+	    
+	    <FormButton
+                isDisabled={!this.props.auth.form.isValid || this.props.auth.form.isFetching}
+                onPress={onButtonPress}
+                buttonText={loginButtonText}/>
+	    
+	    <View >
+	      <View style={styles.forgotContainer}>
+	        {leftMessage}
+                {rightMessage}
+              </View>
+	    </View>	 
+	    
+	  </View>
+	</ScrollView>
+      </View>
+    );
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(LoginRender);

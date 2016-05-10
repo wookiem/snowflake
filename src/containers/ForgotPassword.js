@@ -1,8 +1,6 @@
 /**
  * # ForgotPassword.js
  * 
- * 
- * 
  */
 'use strict';
 /**
@@ -29,23 +27,19 @@ import {Map} from 'immutable';
 import LoginRender from '../components/LoginRender';
 
 /**
- * The necessary React components
+ * Need React
  */
-import React,
-{
-  Component
-}
-from 'react-native';
+import React from 'react-native';
 
 const {
-	REGISTER, 
-	LOGIN,
-	FORGOT_PASSWORD
+  REGISTER, 
+  LOGIN,
+  FORGOT_PASSWORD
 } = require('../lib/constants').default;
 
 /**
- * ## Redux boilerplate
- */
+  * ## Redux boilerplate
+  */
 const actions = [
   authActions
 ];
@@ -69,30 +63,30 @@ function mapDispatchToProps(dispatch) {
 }
 
 function buttonPressHandler(resetPassword, email) {
-	resetPassword (email);
+  resetPassword (email);
 }
 
 let ForgotPassword = React.createClass({
 
   render() {
-		let loginButtonText = 'Reset password';
-		let onButtonPress = buttonPressHandler.bind(null,
-					this.props.actions.resetPassword,
-					this.props.auth.form.fields.email
-		);
+    let loginButtonText = 'Reset password';
+    let onButtonPress = buttonPressHandler.bind(null,
+					        this.props.actions.resetPassword,
+					        this.props.auth.form.fields.email
+		                               );
 
-		return(
-			<LoginRender 
-				formType={ FORGOT_PASSWORD }
-				loginButtonText={ loginButtonText }
-				onButtonPress={ onButtonPress }
-				displayPasswordCheckbox={ false }
-				leftMessageType = { REGISTER }
-				rightMessageType = { LOGIN }
-				auth={ this.props.auth }
-				global={ this.props.global }
-			/>
-		);
+    return(
+      <LoginRender 
+          formType={ FORGOT_PASSWORD }
+          loginButtonText={ loginButtonText }
+          onButtonPress={ onButtonPress }
+          displayPasswordCheckbox={ false }
+          leftMessageType = { REGISTER }
+          rightMessageType = { LOGIN }
+          auth={ this.props.auth }
+          global={ this.props.global }
+      />
+    );
   }
 });
 
